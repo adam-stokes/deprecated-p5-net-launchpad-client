@@ -1,7 +1,10 @@
-requires 'perl', '5.008005';
-
-# requires 'Some::Module', 'VERSION';
+requires 'Class::Load';
+requires 'Mojo::Base';
+requires 'Mojo::JSON';
+requires 'URI';
+requires 'URI::Encode';
+requires 'URI::QueryParam';
 
 on test => sub {
-    requires 'Test::More', '0.88';
+    requires 'Test::More';
 };

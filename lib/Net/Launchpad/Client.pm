@@ -2,21 +2,34 @@ package Net::Launchpad::Client;
 
 use Mojo::Base -base;
 use Mojo::JSON;
+use Mojo::UserAgent;
 use URI::Encode;
 use URI::QueryParam;
 use URI;
 
-our $VERSION = '0.022';
+our $VERSION = '0.99_1';
 
-has 'json' => sub { my $self = shift; Mojo::JSON->new };
+has 'staging' => 0;
+
+has 'json' => sub {
+    my $self = shift;
+    return Mojo::JSON->new;
+};
+
+has 'ua' => sub {
+    my $self = shift;
+    my $ua   = Mojo::UserAgent->new;
+    $ua->transactor->name("Net::Launchpad/$VERSION");
+    return $ua;
+};
 
 sub api_url {
     my $self = shift;
     if ($self->staging) {
-        'https://api.staging.launchpad.net/1.0';
+      return Mojo::URL->new('https://api.staging.launchpad.net/1.0/');
     }
     else {
-        'https://api.launchpad.net/1.0';
+      return Mojo::URL->new('https://api.launchpad.net/1.0/');
     }
 }
 
@@ -33,9 +46,9 @@ sub __query_from_hash {
 sub __path_cons {
     my ($self, $path) = @_;
     if ($path =~ /^http.*api/) {
-        return URI->new("$path", 'https');
+        return Mojo::URL->new($path);
     }
-    return URI->new($self->api_url . "/$path", 'https');
+    return $self->api_url->path($path);
 }
 
 sub __oauth_authorization_header {
