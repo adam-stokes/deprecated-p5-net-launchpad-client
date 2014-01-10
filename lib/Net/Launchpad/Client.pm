@@ -10,6 +10,16 @@ our $VERSION = '0.022';
 
 has 'json' => sub { my $self = shift; Mojo::JSON->new };
 
+sub api_url {
+    my $self = shift;
+    if ($self->staging) {
+        'https://api.staging.launchpad.net/1.0';
+    }
+    else {
+        'https://api.launchpad.net/1.0';
+    }
+}
+
 sub __query_from_hash {
     my ($self, $params) = @_;
     my $uri = URI->new;
