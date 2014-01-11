@@ -3,12 +3,15 @@ package Net::Launchpad::Client;
 use Mojo::Base -base;
 use Mojo::JSON;
 use Mojo::UserAgent;
-use URI::Encode;
-use URI::QueryParam;
-use URI;
+use Mojo::Parameters;
+use Class::Load ':all';
+use DDP;
 
 our $VERSION = '0.99_1';
 
+has 'consumer_key';
+has 'access_token';
+has 'access_token_secret';
 has 'staging' => 0;
 
 has 'json' => sub {
@@ -23,6 +26,30 @@ has 'ua' => sub {
     return $ua;
 };
 
+has 'nonce' => sub {
+    my $self  = shift;
+    my @a     = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
+    my $nonce = '';
+    for (0 .. 31) {
+        $nonce .= $a[rand(scalar(@a))];
+    }
+    return $nonce;
+};
+
+has 'authorization_header' => sub {
+    my $self = shift;
+    return join(",",
+        'OAuth realm="https://api.launchpad.net"',
+        'oauth_consumer_key=' . $self->consumer_key,
+        'oauth_version=1.0',
+        'oauth_signature_method=PLAINTEXT',
+        'oauth_signature=' . '&' . $self->access_token_secret,
+        'oauth_token=' . $self->access_token,
+        'oauth_token_secret=' . $self->access_token_secret,
+        'oauth_timestamp=' . time,
+        'oauth_nonce=' . $self->nonce);
+};
+
 sub api_url {
     my $self = shift;
     if ($self->staging) {
@@ -33,14 +60,12 @@ sub api_url {
     }
 }
 
-sub __query_from_hash {
-    my ($self, $params) = @_;
-    my $uri = URI->new;
-    for my $param (keys $params) {
-        $uri->query_param_append($param, $params->{$param});
-    }
-    return $uri->query;
+sub model {
+    my ($self, $class) = @_;
+    my $model = "Net::Launchpad::Model::$class";
+    return load_class($model)->new($self);
 }
+
 
 # construct path, if a resource link just provide as is.
 sub __path_cons {
@@ -51,104 +76,22 @@ sub __path_cons {
     return $self->api_url->path($path);
 }
 
-sub __oauth_authorization_header {
-    my ($self, $request) = @_;
-    my $enc = URI::Encode->new({encode_reserved => 1});
-    return join(",",
-        'OAuth realm="https://api.launchpad.net"',
-        'oauth_consumer_key="' . $request->consumer_key . '"',
-        'oauth_token="' . $request->token . '"',
-        'oauth_signature_method="PLAINTEXT"',
-        'oauth_signature="' . $enc->encode($request->signature) . '"',
-        'oauth_timestamp="' . $request->timestamp . '"',
-        'oauth_nonce="' . $request->nonce . '"',
-        'oauth_version="' . $request->version . '"');
-}
-
-sub _request {
-    my ($self, $resource, $params, $method) = @_;
-    my $uri = $self->__path_cons($resource);
-
-    # If no credentials we assume data is public and
-    # bail out afterwards
-    if (   !defined($self->consumer_key)
-        || !defined($self->access_token)
-        || !defined($self->access_token_secret))
-    {
-        my $res = $self->ua->get($uri->as_string);
-        die $res->res->body unless $res->res->code == 200;
-        return $self->json->decode($res->res->body);
-    }
-
-    # If we are here then it is assumed we've passed the
-    # necessary credentials to access protected data
-    my $request = Net::OAuth->request('protected resource')->new(
-        consumer_key     => $self->consumer_key,
-        consumer_secret  => '',
-        token            => $self->access_token,
-        token_secret     => $self->access_token_secret,
-        request_url      => $uri->as_string,
-        request_method   => $method,
-        signature_method => 'PLAINTEXT',
-        timestamp        => time,
-        nonce            => $self->_nonce,
-    );
-    $request->sign;
-
-    if ($method eq "POST") {
-        my $_req = $self->ua->post(
-            $request->normalized_request_url => {
-                'Authorization' =>
-                  $self->__oauth_authorization_header($request)
-            }
-        );
-        $_req->content($self->__query_from_hash($params));
-        my $res = $self->ua->get($_req);
-        die "Failed to POST: " . $res->res->message unless ($res->res->code == 201);
-    }
-    elsif ($method eq "PATCH") {
-        my $_req = $self->ua->patch(
-            $request->normalized_request_url => {
-                'User-Agent'   => 'imafreakinninjai/1.0',
-                'Content-Type' => 'application/json',
-                'Authorization' =>
-                  $self->__oauth_authorization_header($request)
-            }
-        );
-        $_req->content($self->json->encode($params));
-        my $res = $self->ua->get($_req);
-
-        # For current Launchpad API 1.0 the response code is 209
-        # (Initially in draft spec for PATCH, but, later removed
-        # during final)
-        # FIXME: Check for Proper response code 200 after 2015 when
-        # API is expired.
-        die $res->{_content} unless $res->{_rc} == 209;
-        return $self->json->decode($res->body);
-    }
-    else {
-        my $res = $self->ua->get($request->to_url);
-        die $res->res->body unless $res->res->code == 200;
-        return $self->json->decode($res->res->body);
-    }
-}
-
 sub get {
     my ($self, $resource) = @_;
-    return $self->_request($resource, undef, 'GET');
+    my $uri = $self->__path_cons($resource);
+    my $tx = $self->ua->get($uri->to_string => {'Authorization' => $self->authorization_header});
+    die $tx->res->body unless $tx->success;
+    return $self->json->decode($tx->res->body);
 }
 
 
 sub post {
     my ($self, $resource, $params) = @_;
-    return $self->_request($resource, $params, 'POST');
+    my $params_hash = Mojo::Parameters->new($params);
+    my $uri = $self->__path_cons($resource);
+    my $tx = $self->ua->post($uri->to_string => {'Authorization' => $self->authorization_header} => form => $params_hash->to_string);
+    die $tx->res->message unless $tx->success;
 }
-
-sub update {
-    my ($self, $resource, $params) = @_;
-    return $self->_request($resource, $params, 'PATCH');
-}
-
 
 1;
 
@@ -161,7 +104,11 @@ Net::Launchpad::Client - Launchpad.net Client routines
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
-    my $lp = Net::Launchpad::Client->new;
+    my $lp = Net::Launchpad::Client->new(
+        access_token        => '32432432432',
+        access_token_secret => '32432432423432423432423232',
+        consumer_key        => 'a-named-key'
+    );
 
 =head1 ATTRIBUTES
 
@@ -169,7 +116,31 @@ Net::Launchpad::Client - Launchpad.net Client routines
 
 A L<Mojo::JSON> object.
 
+=head1 ATTRIBUTES
+
+=head2 consumer_key
+
+=head2 access_token
+
+=head2 access_token_secret
+
+=head2 json
+
+=head2 ua
+
+=head2 staging
+
+=head2 nonce
+
+=head2 authorization_header
+
+Authorization string as described at L<https://help.launchpad.net/API/SigningRequests> B<Using the credentials>
+
 =head1 METHODS
+
+=head2 B<api_url>
+
+Launchpad API host
 
 =head2 B<get>
 
@@ -178,10 +149,6 @@ Performs a HTTP GET request for a particular resource.
 =head2 B<post>
 
 Performs a HTTP POST request for a resource.
-
-=head2 B<update>
-
-Performs a HTTP PATCH request to update a resource.
 
 =head1 AUTHOR
 

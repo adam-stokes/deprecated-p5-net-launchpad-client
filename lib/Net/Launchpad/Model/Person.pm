@@ -1,6 +1,6 @@
 package Net::Launchpad::Model::Person;
 
-use Mojo::Base 'Net::Launchpad::Model';
+use Mojo::Base 'Net::Launchpad::Client';
 
 has 'person';
 
@@ -106,12 +106,14 @@ Net::Launchpad::Model::Person - Launchpad.net person interface
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
-    use Net::Launchpad::Model;
-    my $c = Net::Launchpad::Client->new;
+    my $c = Net::Launchpad::Client->new(
+        consumer_key        => 'key',
+        access_token        => '3243232',
+        access_token_secret => '432432432'
+    );
     $c->staging(1);
 
-    my $model = Net::Launchpad::Model->new($c);
-    my $person = $model->namespace('Person')->by_name('~adam-stokes');
+    my $person = $c->model('Person')->by_name('~adam-stokes');
 
     say "Name: ". $person->name;
 

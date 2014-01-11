@@ -4,16 +4,16 @@
 # proper examples of current api.
 
 use Mojo::Base -strict;
-use 5.14.0;
 use FindBin;
 use lib "$FindBin::Bin/../../lib";
-use Net::OAuth::LP::Client;
-use Net::OAuth::LP::Model;
+use Net::Launchpad::Client;
 use List::AllUtils qw(first);
 
 use DDP;
 
-my $c = Net::OAuth::LP::Client->new;
+my $public_bug = $ENV{LP_BUG} || '1268207';
+
+my $c = Net::Launchpad::Client->new;
 if (   defined($ENV{LP_CONSUMER_KEY})
     && defined($ENV{LP_ACCESS_TOKEN})
     && defined($ENV{LP_ACCESS_TOKEN_SECRET}))
@@ -27,30 +27,17 @@ if (   defined($ENV{LP_CONSUMER_KEY})
 $c->staging(0);
 
 p $c;
-
-my $model = Net::OAuth::LP::Model->new($c);
-
-p $model;
-
-my $bug = $model->namespace('Bug')->by_id($ENV{LP_BUG});
+my $bug = $c->model('Bug')->by_id($public_bug);
 
 say "Bug representation";
 
-p $bug;
-
-p $bug->tasks;
-
-p $bug->date_created;
-
-p $bug->watches;
-
-my $bugtask =
-  first { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ } @{$bug->tasks};
-
-# p $bugtask;
-
-my $person = $model->namespace('Person')->by_name('~adam-stokes');
-
-p $person;
-
-p $person->ppas;
+p $bug->title;
+# p $bug->tasks;
+# p $bug->date_created;
+# p $bug->watches;
+# my $bugtask =
+#   first { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ } @{$bug->tasks};
+# # p $bugtask;
+# my $person = $c->model('Person')->by_name('~adam-stokes');
+# p $person;
+# p $person->ppas;
