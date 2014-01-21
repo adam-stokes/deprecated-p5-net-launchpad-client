@@ -1,8 +1,26 @@
 package Net::Launchpad::Model::CVE;
+# ABSTRACT: CVE Model
+
+=head1 SYNOPSIS
+
+    use Net::Launchpad::Client;
+    my $c = Net::Launchpad::Client->new(
+        consumer_key        => 'key',
+        access_token        => '3243232',
+        access_token_secret => '432432432'
+    );
+    $c->staging(1);
+
+    my $cve = $c->model('CVE')->by_sequence('XXXX-XXXX');
+
+    say "Title: ". $cve->title;
+    say "Desc:  ". $cve->description;
+
+=cut
 
 use Mojo::Base 'Net::Launchpad::Client';
 
-has 'cve';
+has 'cve' => '';
 
 sub by_sequence {
     my ($self, $sequence) = @_;
@@ -65,100 +83,52 @@ sub sequence {
 
 __END__
 
-=head1 NAME
-
-Net::Launchpad::Model::CVE - Launchpad.net cve Interface
-
-=head1 SYNOPSIS
-
-    use Net::Launchpad::Client;
-    my $c = Net::Launchpad::Client->new(
-        consumer_key        => 'key',
-        access_token        => '3243232',
-        access_token_secret => '432432432'
-    );
-    $c->staging(1);
-
-    my $cve = $c->model('CVE')->by_sequence('XXXX-XXXX');
-
-    say "Title: ". $cve->title;
-    say "Desc:  ". $cve->description;
-
-=head1 DESCRIPTION
-
-CVE model for Launchpad.net Bugs.
-
-=head1 ATTRIBUTES
-
-=head2 cve
+=attr cve
 
 CVE object.
 
-=head1 METHODS
-
-=head2 by_sequence
+=method by_sequence
 
 This needs to be called before any of the below methods. Takes a CVE sequence number, e.g. 2011-3188.
 
-=head2 sequence
+=method sequence
 
 Returns cve number.
 
-=head2 title
+=method title
 
 Returns title of cve.
 
-=head2 bugs
+=method bugs
 
 Returns a list of entries associated with cve
 
-=head2 web_link
+=method web_link
 
 Returns browseable URL link to resource.
 
-=head2 description
+=method description
 
 Returns cve description
 
-=head2 status
+=method status
 
 Returns whether the cve is of candidate, entry, deprecated
 
-=head2 date_created
+=method date_created
 
 Returns date cve was created
 
-=head2 date_modified
+=method date_modified
 
 Return date of last modification
 
-=head2 display_name
+=method display_name
 
 Returns brief description of the ref and state
 
-=head2 url
+=method url
 
 Returns URL to site that contains CVE data for this CVE reference.
-
-=head1 AUTHOR
-
-Adam Stokes, C<< <adamjs at cpan.org> >>
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<https://launchpad.net/launchpadlib>, "Python implementation"
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut

@@ -1,8 +1,29 @@
 package Net::Launchpad::Model::Bug;
+# ABSTRACT: Bug Model
+
+=head1 SYNOPSIS
+
+    use Net::Launchpad::Client;
+    my $c = Net::Launchpad::Client->new(
+        consumer_key        => 'key',
+        access_token        => '3243232',
+        access_token_secret => '432432432'
+    );
+    $c->staging(1);
+
+    my $bug = $c->model('Bug')->by_id(3);
+
+    say "Title: ". $bug->title;
+    say "Desc:  ". $bug->description;
+    say "Heat:  ". $bug->heat;
+
+=head1 DESCRIPTION
+
+=cut
 
 use Mojo::Base 'Net::Launchpad::Client';
 
-has 'bug';
+has 'bug' => '';
 
 sub by_id {
     my ($self, $id) = @_;
@@ -122,145 +143,96 @@ sub can_expire {
 
 __END__
 
-=head1 NAME
-
-Net::Launchpad::Model::Bug - Launchpad.net bug Interface
-
-=head1 SYNOPSIS
-
-    use Net::Launchpad::Client;
-    my $c = Net::Launchpad::Client->new(
-        consumer_key        => 'key',
-        access_token        => '3243232',
-        access_token_secret => '432432432'
-    );
-    $c->staging(1);
-
-    my $bug = $c->model('Bug')->by_id(3);
-
-    say "Title: ". $bug->title;
-    say "Desc:  ". $bug->description;
-    say "Heat:  ". $bug->heat;
-
-=head1 DESCRIPTION
-
-Bug model for Launchpad.net Bugs.
-
-=head1 ATTRIBUTES
-
-=head2 bug
+=attr bug
 
 Bug object.
 
-=head1 METHODS
-
-=head2 by_id
+=method by_id
 
 This needs to be called before any of the below methods. Takes a Bug ID number.
 
-=head2 id
+=method id
 
 Returns bug number.
 
-=head2 title
+=method title
 
 Returns title of bug.
 
-=head2 tasks
+=method tasks
 
 Returns a list of entries in the tasks object.
 
-=head2 owner
+=method owner
 
 Returns creator of bug
 
-=head2 web_link
+=method web_link
 
 Returns browseable URL link to resource.
 
-=head2 messages
+=method messages
 
 Returns bug messages associated with Bug.
 
-=head2 message_count
+=method message_count
 
 Returns message count
 
-=head2 heat
+=method heat
 
 Returns heat/importance of bug
 
-=head2 description
+=method description
 
 Returns bug description
 
-=head2 information_type
+=method information_type
 
 Returns whether this bug is a public/private issue.
 
-=head2 tags
+=method tags
 
 Returns a list of Tags associated with bug.
 
-=head2 activity
+=method activity
 
 Returns a bug activity collection
 
-=head2 attachments
+=method attachments
 
 Returns list of bug attachments
 
-=head2 can_expire
+=method can_expire
 
 Returns whether the incomplete bug can be expired
 
-=head2 date_created
+=method date_created
 
 Returns date bug was created
 
-=head2 date_last_message
+=method date_last_message
 
 Return date of last posted bug message
 
-=head2 date_last_updated
+=method date_last_updated
 
 Returns date of last update, can be bug message or status changes.
 
-=head2 duplicate_count
+=method duplicate_count
 
 Returns number of bug duplicates
 
-=head2 duplicate_of
+=method duplicate_of
 
 Returns a bug resource that the specific bug is a duplicate of
 
-=head2 users_affected_count
+=method users_affected_count
 
 Returns count of users affected by bug
 
-=head2 watches
+=method watches
 
 Returns bug watch collection
-
-=head1 AUTHOR
-
-Adam Stokes, C<< <adamjs at cpan.org> >>
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<https://launchpad.net/launchpadlib>, "Python implementation"
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut

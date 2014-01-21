@@ -1,8 +1,27 @@
 package Net::Launchpad::Model::Person;
+# ABSTRACT: Person model
+
+=head1 DESCRIPTION
+
+=head1 SYNOPSIS
+
+    use Net::Launchpad::Client;
+    my $c = Net::Launchpad::Client->new(
+        consumer_key        => 'key',
+        access_token        => '3243232',
+        access_token_secret => '432432432'
+    );
+    $c->staging(1);
+
+    my $person = $c->model('Person')->by_name('~adam-stokes');
+
+    say "Name: ". $person->name;
+
+=cut
 
 use Mojo::Base 'Net::Launchpad::Client';
 
-has 'person';
+has 'person' => '';
 
 sub by_name {
     my ($self, $name) = @_;
@@ -99,125 +118,78 @@ sub web_link {
 
 __END__
 
-=head1 NAME
-
-Net::Launchpad::Model::Person - Launchpad.net person interface
-
-=head1 SYNOPSIS
-
-    use Net::Launchpad::Client;
-    my $c = Net::Launchpad::Client->new(
-        consumer_key        => 'key',
-        access_token        => '3243232',
-        access_token_secret => '432432432'
-    );
-    $c->staging(1);
-
-    my $person = $c->model('Person')->by_name('~adam-stokes');
-
-    say "Name: ". $person->name;
-
-=head1 DESCRIPTION
-
-Person model for Launchpad.net.
-
-=head1 ATTRIBUTES
-
-=head2 person
+=attr person
 
 Holds person object.
 
-=head1 METHODS
-
-=head2 by_name
+=method by_name
 
 This needs to be called before any of the below methods. Takes a login
 id, e.g. ~adam-stokes
 
-=head2 name
+=method name
 
 Returns person name.
 
-=head2 karma
+=method karma
 
 Returns person karma.
 
-=head2 display_name
+=method display_name
 
 Returns friendly display name
 
-=head2 date_created
+=method date_created
 
 Returns date person registered
 
-=head2 description
+=method description
 
 Returns description blob
 
-=head2 gpg_keys
+=method gpg_keys
 
 Returns list a gpg keys registered
 
-=head2 irc_nicks
+=method irc_nicks
 
 Returns list of irc nicks
 
-=head2 is_team
+=method is_team
 
 Returns whether collection is a person or team
 
-=head2 is_ubuntu_coc_signer
+=method is_ubuntu_coc_signer
 
 Returns if person signed Ubuntu COC
 
-=head2 is_valid
+=method is_valid
 
 Returns if person is valid and not a deactivated account
 
-=head2 ppas
+=method ppas
 
 Returns list of ppas associated
 
-=head2 private
+=method private
 
 Returns if person or team is registered as private
 
-=head2 source_recipes
+=method source_recipes
 
 Returns recipe collection of package builds
 
-=head2 ssh_keys
+=method ssh_keys
 
 Returns list of public ssh keys
 
-=head2 time_zone
+=method time_zone
 
 Returns persons time zone
 
-=head2 web_link
+=method web_link
 
 Returns friendly display name, usually first and last name.
-
-=head1 AUTHOR
-
-Adam Stokes, C<< <adamjs at cpan.org> >>
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<https://launchpad.net/launchpadlib>, "Python implementation"
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut
 

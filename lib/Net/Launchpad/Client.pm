@@ -1,17 +1,30 @@
 package Net::Launchpad::Client;
+# ABSTRACT: Launchpad.net Client
+
+=head1 SYNOPSIS
+
+    use Net::Launchpad::Client;
+    my $lp = Net::Launchpad::Client->new(
+        access_token        => '32432432432',
+        access_token_secret => '32432432423432423432423232',
+        consumer_key        => 'a-named-key'
+    );
+
+=head1 DESCRIPTION
+
+=cut
 
 use Mojo::Base -base;
 use Mojo::JSON;
 use Mojo::UserAgent;
 use Mojo::Parameters;
 use Class::Load ':all';
-use DDP;
 
 our $VERSION = '0.99_1';
 
-has 'consumer_key';
-has 'access_token';
-has 'access_token_secret';
+has 'consumer_key' => '';
+has 'access_token' => '';
+has 'access_token_secret' => '';
 has 'staging' => 0;
 
 has 'json' => sub {
@@ -66,8 +79,6 @@ sub model {
     return load_class($model)->new($self);
 }
 
-
-# construct path, if a resource link just provide as is.
 sub __path_cons {
     my ($self, $path) = @_;
     if ($path =~ /^http.*api/) {
@@ -79,112 +90,72 @@ sub __path_cons {
 sub get {
     my ($self, $resource) = @_;
     my $uri = $self->__path_cons($resource);
-    my $tx = $self->ua->get($uri->to_string => {'Authorization' => $self->authorization_header});
+    my $tx =
+      $self->ua->get(
+        $uri->to_string => {'Authorization' => $self->authorization_header});
     die $tx->res->body unless $tx->success;
     return $self->json->decode($tx->res->body);
 }
 
-
 sub post {
     my ($self, $resource, $params) = @_;
     my $params_hash = Mojo::Parameters->new($params);
-    my $uri = $self->__path_cons($resource);
-    my $tx = $self->ua->post($uri->to_string => {'Authorization' => $self->authorization_header} => form => $params_hash->to_string);
+    my $uri         = $self->__path_cons($resource);
+    my $tx =
+      $self->ua->post($uri->to_string =>
+          {'Authorization' => $self->authorization_header} => form =>
+          $params_hash->to_string);
     die $tx->res->message unless $tx->success;
 }
 
 1;
 
-__END__
+=attr json
 
-=head1 NAME
+json object
 
-Net::Launchpad::Client - Launchpad.net Client routines
+=attr consumer_key
 
-=head1 SYNOPSIS
+OAuth Consumer key
 
-    use Net::Launchpad::Client;
-    my $lp = Net::Launchpad::Client->new(
-        access_token        => '32432432432',
-        access_token_secret => '32432432423432423432423232',
-        consumer_key        => 'a-named-key'
-    );
+=attr access_token
 
-=head1 ATTRIBUTES
+OAuth access token
 
-=head2 B<json>
+=attr access_token_secret
 
-A L<Mojo::JSON> object.
+OAuth access_token_secret
 
-=head1 ATTRIBUTES
+=attr ua
 
-=head2 consumer_key
+useragent
 
-=head2 access_token
+=attr staging
 
-=head2 access_token_secret
+Staging or Production boolean
 
-=head2 json
+=attr nonce
 
-=head2 ua
+Nonce
 
-=head2 staging
-
-=head2 nonce
-
-=head2 authorization_header
+=attr authorization_header
 
 Authorization string as described at L<https://help.launchpad.net/API/SigningRequests> B<Using the credentials>
 
-=head1 METHODS
+=method __path_cons
 
-=head2 B<api_url>
+(Private) Returns either full resource link or combined path depending on the query.
+
+=method api_url
 
 Launchpad API host
 
-=head2 B<get>
+=method get
 
 Performs a HTTP GET request for a particular resource.
 
-=head2 B<post>
+=method post
 
 Performs a HTTP POST request for a resource.
-
-=head1 AUTHOR
-
-Adam Stokes, C<< <adamjs at cpan.org> >>
-
-=head1 BUGS
-
-Report bugs to https://github.com/battlemidget/Net-Launchpad-Client/issues.
-
-=head1 DEVELOPMENT
-
-=head2 Repository
-
-    http://github.com/battlemidget/Net-Launchpad-Client
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Net::Launchpad::Client
-
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<https://launchpad.net/launchpadlib>, "Python implementation"
-
-=back
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut
