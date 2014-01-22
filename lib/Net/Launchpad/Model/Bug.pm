@@ -13,9 +13,9 @@ package Net::Launchpad::Model::Bug;
 
     my $bug = $c->model('Bug')->by_id(3);
 
-    say "Title: ". $bug->title;
-    say "Desc:  ". $bug->description;
-    say "Heat:  ". $bug->heat;
+    print "Title: ". $bug->title;
+    print "Desc:  ". $bug->description;
+    print "Heat:  ". $bug->heat;
 
 =head1 DESCRIPTION
 

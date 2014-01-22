@@ -15,7 +15,7 @@ package Net::Launchpad::Model::Person;
 
     my $person = $c->model('Person')->by_name('~adam-stokes');
 
-    say "Name: ". $person->name;
+    print "Name: ". $person->name;
 
 =cut
 

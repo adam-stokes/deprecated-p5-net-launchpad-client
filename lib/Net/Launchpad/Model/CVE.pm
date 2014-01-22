@@ -13,8 +13,8 @@ package Net::Launchpad::Model::CVE;
 
     my $cve = $c->model('CVE')->by_sequence('XXXX-XXXX');
 
-    say "Title: ". $cve->title;
-    say "Desc:  ". $cve->description;
+    print "Title: ". $cve->title;
+    print "Desc:  ". $cve->description;
 
 =cut
 
