@@ -1,6 +1,6 @@
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -19,55 +19,68 @@ version 0.99
         consumer_key        => 'a-named-key'
     );
 
-=head1 DESCRIPTION
+=head1 ATTRIBUTES
 
-=attr json
+=head2 json
 
 json object
 
-=attr consumer_key
+=head2 consumer_key
 
 OAuth Consumer key
 
-=attr access_token
+=head2 access_token
 
 OAuth access token
 
-=attr access_token_secret
+=head2 access_token_secret
 
 OAuth access_token_secret
 
-=attr ua
+=head2 ua
 
 useragent
 
-=attr staging
+=head2 staging
 
 Staging or Production boolean
 
-=attr nonce
+=head2 nonce
 
 Nonce
 
-=attr authorization_header
+=head2 authorization_header
 
 Authorization string as described at L<https://help.launchpad.net/API/SigningRequests> B<Using the credentials>
 
-=method __path_cons
+=head1 METHODS
+
+=head2 __path_cons
 
 (Private) Returns either full resource link or combined path depending on the query.
 
-=method api_url
+=head2 api_url
 
 Launchpad API host
 
-=method get
+=head2 get
 
 Performs a HTTP GET request for a particular resource.
 
-=method post
+=head2 post
 
 Performs a HTTP POST request for a resource.
+
+=head1 AUTHOR
+
+Adam Stokes <adamjs@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by Adam Stokes.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =head1 AUTHOR
 

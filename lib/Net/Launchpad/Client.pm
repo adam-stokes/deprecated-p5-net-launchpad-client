@@ -10,8 +10,6 @@ package Net::Launchpad::Client;
         consumer_key        => 'a-named-key'
     );
 
-=head1 DESCRIPTION
-
 =cut
 
 use Mojo::Base -base;
@@ -19,8 +17,6 @@ use Mojo::JSON;
 use Mojo::UserAgent;
 use Mojo::Parameters;
 use Class::Load ':all';
-
-our $VERSION = '0.99_1';
 
 has 'consumer_key' => '';
 has 'access_token' => '';
@@ -35,7 +31,7 @@ has 'json' => sub {
 has 'ua' => sub {
     my $self = shift;
     my $ua   = Mojo::UserAgent->new;
-    $ua->transactor->name("Net::Launchpad/$VERSION");
+    $ua->transactor->name("Net::Launchpad/0.99");
     return $ua;
 };
 
