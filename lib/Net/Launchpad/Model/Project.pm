@@ -15,7 +15,7 @@ package Net::Launchpad::Model::Project;
 
     my $project = $c->model('Project')->by_name('sosreport');
 
-    say "Name: ". $project->name;
+    print "Name: ". $project->name;
 
 =cut
 
