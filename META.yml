@@ -1,0 +1,28 @@
+---
+abstract: 'Launchpad.net Client'
+author:
+  - 'Adam Stokes <adamjs@cpan.org>'
+build_requires:
+  Class::Load: '0'
+  Mojolicious: '0'
+  Net::Launchpad: '0'
+  Test::Mojo: '0'
+  Test::More: '0'
+  Test::NoTabs: '0'
+  strict: '0'
+configure_requires:
+  ExtUtils::MakeMaker: '6.30'
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 5.017, CPAN::Meta::Converter version 2.141170'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Net-Launchpad-Client
+requires:
+  Class::Load: '0'
+  Mojo::Base: '0'
+  Mojo::JSON: '0'
+  Mojo::Parameters: '0'
+  Mojo::UserAgent: '0'
+version: '1.03'
