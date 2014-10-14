@@ -16,7 +16,7 @@ use Mojo::Base -base;
 use Mojo::JSON;
 use Mojo::UserAgent;
 use Mojo::Parameters;
-use Class::Load ':all';
+use Module::Runtime qw(use_package_optimistically);
 
 has 'consumer_key' => '';
 has 'access_token' => '';
@@ -72,7 +72,7 @@ sub api_url {
 sub model {
     my ($self, $class) = @_;
     my $model = "Net::Launchpad::Model::$class";
-    return load_class($model)->new($self);
+    return use_package_optimistically($model)->new($self);
 }
 
 sub __path_cons {
