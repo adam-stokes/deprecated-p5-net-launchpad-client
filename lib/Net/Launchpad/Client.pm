@@ -154,4 +154,8 @@ Performs a HTTP GET request for a particular resource.
 
 Performs a HTTP POST request for a resource.
 
+=head1 SEE ALSO
+
+L<https://api.launchpad.net>
+
 =cut

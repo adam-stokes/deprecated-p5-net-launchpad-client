@@ -100,13 +100,5 @@ Query a project by name
 
 Link to bug supervisor
 
-=head1 SEE ALSO
-
-=over 4
-
-=item * L<https://launchpad.net/launchpadlib>, "Python implementation"
-
-=back
-
 =cut
 

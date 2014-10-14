@@ -1,15 +1,187 @@
-Revision history for Net-Launchpad-Client
+==================================================
+Changes from 2013-10-14 00:00:00 +0000 to present.
+==================================================
 
-{{$NEXT}}
+-----------------------------------------
+version 1.03 at 2014-10-14 03:13:38 +0000
+-----------------------------------------
 
-1.02    2014-01-22
+  Change: 5496e11a74a7fe48cdc906d1b858e2886a37ee7b
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-05-19 11:58:26 +0000
 
-1.01    2014-01-22
+    update build
 
-1.00    2014-01-22
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
 
-0.99      2014-01-22
-	- Work on documentation
+  Change: 557c59f3f30b828b7f89f2bcc251a1d84afb9181
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-22 00:01:14 +0000
 
-0.99_1  2014-01-11 16:57:50 EST
-        - Initial release
+    remove meta
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 555638d6d96837c460937f0e918517e586154bd9
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:50:10 +0000
+
+    v1.02 
+
+  Change: 89499cbf073b48775249aabd30d10508d4aa33cf
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:50:00 +0000
+
+    add branch dist
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 689d2ed0f5d9f0a5fbdf71b534d259cbc7f19754
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:40:17 +0000
+
+    v1.01 
+
+  Change: 07c3e0c5efdf5fbe502d2bd233743076ffd52ddb
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:25:24 +0000
+
+    update dist
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 58761a57980378207ed1f5c69ee1b57642a95f50
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:23:14 +0000
+
+    v1.00 
+
+  Change: 0b514abf38d558693e350c52ca08faa746a53eed
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:48:10 +0000
+
+    Update docs
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: a78c7706316d679db63f3e2c3f52421521badb0b
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:44:37 +0000
+
+    v0.99
+
+    - Work on documentation 
+
+  Change: 42b382943dbad475f2be84d3ce22029e835f37c4
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:42:42 +0000
+
+    Update synopsis
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: d793e310c96f997a4bdaf1565e75dc86796fdaae
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:42:22 +0000
+
+    Update synopsis
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 010528e28a9b824d8eb8f32a6eebc33859eacfef
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:32:51 +0000
+
+    update docs
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 144245c42966379ade67026433588b0a61f0bec7
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 15:56:50 +0000
+
+    work on dist
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 42f66c92508f3d85aac703c5e7e8c8c5e27d572b
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-11 16:57:55 +0000
+
+    0.99_1 
+
+  Change: bc8b80140282da0cd0551c95b9c75077aa33a76e
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-11 16:57:40 +0000
+
+    update client to make use of new api
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 4aa25c79bc1d2ae7d8ef0ebd9e9e674b9fae7da5
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-10 17:20:03 +0000
+
+    work on refactoring client code
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 8299496a95314960e29f994de9fbb01fcf75e448
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-10 12:57:03 +0000
+
+    add examples
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: e23439e0ef3a543cfdee3d5398f1fcf4667a7c87
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-10 12:35:56 +0000
+
+    initial
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+-----------------------------------------
+version 1.02 at 2014-01-22 03:50:10 +0000
+-----------------------------------------
+
+  Change: 281ff18f22e20ff3e9bb7f41c6df6cfff505d9dc
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:50:10 +0000
+
+    Build results of 555638d (on master) 
+
+-----------------------------------------
+version 1.01 at 2014-01-22 03:40:17 +0000
+-----------------------------------------
+
+  Change: 3c0c55514f9290ad086132e02de8211b73bed035
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:40:17 +0000
+
+    Build results of 689d2ed (on master) 
+
+-----------------------------------------
+version 1.00 at 2014-01-22 03:23:14 +0000
+-----------------------------------------
+
+  Change: 29ecd1108428b36a0c3f88634ce130add997a807
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 22:23:14 +0000
+
+    Build results of 58761a5 (on master) 
+
+-----------------------------------------
+version 0.99 at 2014-01-22 02:44:37 +0000
+-----------------------------------------
+
+  Change: 50d2889f9166aa8d411628b822b8b6d623e554e6
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-01-21 21:44:37 +0000
+
+    Build results of a78c770 (on master) 
+
+================
+End of releases.
+================
