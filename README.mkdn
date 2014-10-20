@@ -4,7 +4,7 @@ Net::Launchpad::Client - Launchpad.net Client
 
 # VERSION
 
-version 1.03
+version 1.04
 
 # SYNOPSIS
 
@@ -16,10 +16,6 @@ version 1.03
     );
 
 # ATTRIBUTES
-
-## json
-
-json object
 
 ## consumer\_key
 
@@ -33,39 +29,15 @@ OAuth access token
 
 OAuth access\_token\_secret
 
-## ua
-
-useragent
-
 ## staging
 
 Staging or Production boolean
 
-## nonce
-
-Nonce
-
-## authorization\_header
-
-Authorization string as described at [https://help.launchpad.net/API/SigningRequests](https://help.launchpad.net/API/SigningRequests) **Using the credentials**
-
 # METHODS
-
-## \_\_path\_cons
-
-(Private) Returns either full resource link or combined path depending on the query.
 
 ## api\_url
 
 Launchpad API host
-
-## get
-
-Performs a HTTP GET request for a particular resource.
-
-## post
-
-Performs a HTTP POST request for a resource.
 
 # AUTHOR
 
@@ -77,12 +49,6 @@ This software is copyright (c) 2014 by Adam Stokes.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
-# SEE ALSO
-
-Please see those modules/websites for more information related to this module.
-
-- [https://api.launchpad.net](https://api.launchpad.net)
 
 # DISCLAIMER OF WARRANTY
 
