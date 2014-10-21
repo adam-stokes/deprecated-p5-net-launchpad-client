@@ -3,12 +3,12 @@ Changes from 2013-10-21 00:00:00 +0000 to present.
 ==================================================
 
 --------------------------------------------
-version 1.1.0_1 at 2014-10-21 18:48:00 +0000
+version 1.1.0_1 at 2014-10-21 18:48:17 +0000
 --------------------------------------------
 
-  Change: d1afb488c6a4555e40bb4fc5e9fcd3dc70a13055
+  Change: 741e0f92fccdd441007eeef03ccec5d5dad9e2f5
   Author: Adam Stokes <adam.stokes@ubuntu.com>
-  Date : 2014-10-21 14:47:34 +0000
+  Date : 2014-10-21 14:48:11 +0000
 
     More model definitations and search implementations
 
