@@ -42,5 +42,7 @@ requires:
   Moose::Util: '0'
   namespace::autoclean: '0'
 resources:
-  repository: git://github.com/battlemidget/Net-Launchpad-Client
-version: 1.1.0_1
+  homepage: https://github.com/battlemidget/Net-Launchpad-Client
+  repository: https://github.com/battlemidget/Net-Launchpad-Client.git
+version: 1.1.01
+x_authority: cpan:ADAMJS

@@ -4,7 +4,7 @@ Net::Launchpad::Client - Launchpad.net Client
 
 # VERSION
 
-version 1.1.0\_1
+version 1.1.01
 
 # SYNOPSIS
 

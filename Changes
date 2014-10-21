@@ -2,9 +2,23 @@
 Changes from 2013-10-21 00:00:00 +0000 to present.
 ==================================================
 
---------------------------------------------
-version 1.1.0_1 at 2014-10-21 18:48:17 +0000
---------------------------------------------
+-------------------------------------------
+version 1.1.01 at 2014-10-21 21:56:48 +0000
+-------------------------------------------
+
+  Change: 5ac83d97a2714e2983cb234abb46d1961211aa98
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-21 17:55:46 +0000
+
+    add query role tests
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 0ad956003791bf788bbe53d549628a0ebbfdff59
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-21 14:48:37 +0000
+
+    v1.1.0_1 
 
   Change: 741e0f92fccdd441007eeef03ccec5d5dad9e2f5
   Author: Adam Stokes <adam.stokes@ubuntu.com>

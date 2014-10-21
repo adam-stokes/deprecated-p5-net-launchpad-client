@@ -14,7 +14,7 @@ plan skip_all => 'must export launchpad credentials to enable these tests'
   && $ENV{LP_ACCESS_TOKEN}
   && $ENV{LP_ACCESS_TOKEN_SECRET};
 
-diag("testing people api");
+diag("testing country api");
 # replace with the actual test
 use_ok('Net::Launchpad::Client');
 
@@ -26,19 +26,15 @@ my $lp = Net::Launchpad::Client->new(consumer_key => $ENV{LP_CONSUMER_KEY},
 use_ok('Net::Launchpad::Model');
 my $model = Net::Launchpad::Model->new(lpc => $lp);
 
-# person
-my $person = $model->person('~adam-stokes');
-ok($person->result->{name} eq 'adam-stokes', $person->result->{name} . " found correctly.");
+my $country = $model->country('US');
+ok($country->result->{title} eq 'United States of America', "Found the US country");
 
-use_ok('Net::Launchpad::Query');
-my $query           = Net::Launchpad::Query->new(lpc => $lp);
-my $person_by_email = $query->people->get_by_email('adam.stokes@ubuntu.com');
-my $person_by_fuzzy = $query->people->find('adam.stokes');
-ok( $person_by_fuzzy->result->{total_size} == 1,
-    "a least one 'adam.stokes' found correctly."
-);
-ok( $person_by_email->result->{name} eq 'adam-stokes',
-    $person_by_email->result->{name} . " found correctly."
-);
+# TODO: check if these api methods are truly exposed.
+# https://api.launchpad.net/1.0.html#countries
+#
+# use_ok('Net::Launchpad::Query');
+# my $query           = Net::Launchpad::Query->new(lpc => $lp);
+# my $country_by_code = $query->countries->get_by_code('US');
+# print Dumper($country_by_code);
 
 done_testing;

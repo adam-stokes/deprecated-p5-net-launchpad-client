@@ -4,7 +4,18 @@ package Net::Launchpad::Role::Query;
 
 use Moose::Role;
 use Function::Parameters;
+use Data::Dumper::Concise;
 use Mojo::Parameters;
+
+has result => (is => 'rw');
+
+=attr ns
+
+Namespace to query for, ie ('bugs'), is overridden in query roles.
+
+=cut
+
+has ns => (is => 'rw');
 
 =method _build_resource_path
 
@@ -13,8 +24,8 @@ Builds a resource path with params encoded
 =cut
 
 method _build_resource_path ($search_name, $params) {
-    $params = Mojo::Parameters->new($params);
-    return sprintf("%s?%s", $search_name, $params->to_string);
+    my $uri = $self->lpc->__path_cons($search_name);
+    return $uri->query($params);
 }
 
 =method resource
@@ -23,9 +34,10 @@ Returns resource of C<name>
 
 =cut
 
-method resource ($path, $params) {
-    my $uri = $self->_build_resource_path($path, $params);
-    return $self->lpc->get($uri);
+method resource ($params) {
+    my $uri = $self->_build_resource_path($self->ns, $params);
+    $self->result($self->lpc->get($uri->to_string));
+    return $self;
 }
 
 1;
