@@ -4,7 +4,6 @@ package Net::Launchpad::Model::Bug;
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
-    use Net::Launchpad::Model::Bug;
     my $c = Net::Launchpad::Client->new(
         consumer_key        => 'key',
         access_token        => '3243232',
@@ -13,9 +12,9 @@ package Net::Launchpad::Model::Bug;
 
     my $bug = $c->bug(3)
 
-    print "Title: ". $bug->{title};
-    print "Desc:  ". $bug->{description};
-    print "Heat:  ". $bug->{heat};
+    print "Title: ". $bug->result->{title};
+    print "Desc:  ". $bug->result->{description};
+    print "Heat:  ". $bug->result->{heat};
 
 =cut
 

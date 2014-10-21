@@ -12,8 +12,8 @@ package Net::Launchpad::Model::CVE;
 
     my $cve = $c->cve('XXXX-XXXX');
 
-    print "Title: ". $cve->{title};
-    print "Desc:  ". $cve->{description};
+    print "Title: ". $cve->result->{title};
+    print "Desc:  ". $cve->result->{description};
 
 =cut
 

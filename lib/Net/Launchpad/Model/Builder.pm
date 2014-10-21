@@ -2,6 +2,19 @@ package Net::Launchpad::Model::Builder;
 
 # ABSTRACT: Builder Model
 
+=head1 SYNOPSIS
+
+    use Net::Launchpad::Client;
+    my $c = Net::Launchpad::Client->new(
+        consumer_key        => 'key',
+        access_token        => '3243232',
+        access_token_secret => '432432432'
+    );
+
+    my $builder = $c->builder('batsu');
+
+    print "Name: ". $builder->result->{name};
+
 =head1 DESCRIPTION
 
 Build-slave information and state.

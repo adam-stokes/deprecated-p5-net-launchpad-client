@@ -14,7 +14,7 @@ package Net::Launchpad::Model::Project;
 
     my $project = $c->project('sosreport');
 
-    print "Name: ". $project->{name};
+    print "Name: ". $project->result->{name};
 
 =cut
 use Moose;
@@ -24,20 +24,3 @@ extends 'Net::Launchpad::Model::Base';
 
 __PACKAGE__->meta->make_immutable;
 1;
-
-__END__
-
-=attr project
-
-Holds project object.
-
-=method by_name
-
-Query a project by name
-
-=method owner
-
-Return owner of project
-
-=cut
-

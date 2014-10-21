@@ -1,8 +1,6 @@
 package Net::Launchpad::Model::Person;
 # ABSTRACT: Person model
 
-=head1 DESCRIPTION
-
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
@@ -14,7 +12,7 @@ package Net::Launchpad::Model::Person;
 
     my $person = $c->person('~adam-stokes');
 
-    print "Name: ". $person->{name};
+    print "Name: ". $person->result->{name};
 
 =cut
 
