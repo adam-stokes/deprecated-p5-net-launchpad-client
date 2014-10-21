@@ -1,31 +1,55 @@
 package Net::Launchpad::Model;
 
-# ABSTRACT: Query role
+# ABSTRACT: Model class
 
+use Moose;
+use Moose::Util qw(apply_all_roles is_role does_role search_class_by_role);
 use Function::Parameters;
-use Moose::Role;
+use Module::Runtime qw(is_module_name use_package_optimistically);
+use Data::Dumper::Concise;
+use namespace::autoclean;
 
-method _model ($class, @args) {
-    my $model = "Net::Launchpad::Model::$class";
-    return use_package_optimistically($model)->new(@args);
+has lpc => (is => 'ro', isa => 'Net::Launchpad::Client');
+
+method _load_model (Str $name, HashRef $params) {
+    my $model_class = "Net::Launchpad::Model::$name";
+    my $model_role  = "Net::Launchpad::Role::$name";
+
+    die "Invalid model requested." unless is_module_name($model_class);
+    die "Unknown Role module" unless is_module_name($model_role);
+
+    my $model =
+      use_package_optimistically($model_class)->new(params => $params);
+
+    my $role =
+      use_package_optimistically($model_role);
+
+    die "$_ is not a role" unless is_role($role);
+    $role->meta->apply($model);
+    return $model->lpc($self->lpc);
 }
 
-method bug($id) {
-    return $self->_model('Bug', $id);
+method bug (Int $id) {
+    my $params = $self->lpc->get(sprintf("%s/bugs/%s", $self->lpc->api_url, $id));
+    return $self->_load_model('Bug', $params);
 }
 
-method project($name) {
-  return $self->_model('Project', $name);
+method person (Str $name) {
+    my $params = $self->lpc->get(sprintf("%s/%s", $self->lpc->api_url, $name));
+    return $self->_load_model('Person', $params);
 }
 
-method cve($sequence) {
-  return $self->_mode('CVE', $sequence);
+method cve (Str $cve) {
+    my $params =
+      $self->lpc->get(sprintf("%s/bugs/cve/%s", $self->lpc->api_url, $cve));
+    return $self->_load_model('CVE', $params);
 }
 
-method person($name) {
-  return $self->_model('Person', $name);
+method project (Str $name) {
+    my $params = $self->lpc->get(sprintf("%s/%s", $self->lpc->api_url, $name));
+    return $self->_load_model('Project', $params);
 }
 
 
-
+__PACKAGE__->meta->make_immutable;
 1;

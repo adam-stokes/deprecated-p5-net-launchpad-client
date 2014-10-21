@@ -33,12 +33,6 @@ OAuth access\_token\_secret
 
 Staging or Production boolean
 
-# METHODS
-
-## api\_url
-
-Launchpad API host
-
 # AUTHOR
 
 Adam Stokes <adamjs@cpan.org>

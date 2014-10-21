@@ -1,7 +1,9 @@
+requires "Data::Dumper::Concise" => "0";
 requires "Function::Parameters" => "0";
 requires "Module::Runtime" => "0";
 requires "Mojo::JSON" => "0";
 requires "Mojo::Parameters" => "0";
+requires "Mojo::URL" => "0";
 requires "Mojo::UserAgent" => "0";
 requires "Moose" => "0";
 requires "Moose::Role" => "0";
@@ -9,8 +11,6 @@ requires "Moose::Util" => "0";
 requires "namespace::autoclean" => "0";
 
 on 'test' => sub {
-  requires "Class::Load" => "0";
-  requires "Data::Dumper::Concise" => "0";
   requires "ExtUtils::MakeMaker" => "0";
   requires "File::Spec" => "0";
   requires "FindBin" => "0";

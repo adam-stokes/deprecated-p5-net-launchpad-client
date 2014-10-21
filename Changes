@@ -1,10 +1,18 @@
 ==================================================
-Changes from 2013-10-20 00:00:00 +0000 to present.
+Changes from 2013-10-21 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 1.04 at 2014-10-20 21:46:01 +0000
+version 1.04 at 2014-10-21 04:45:36 +0000
 -----------------------------------------
+
+  Change: 14c3681a75c563652b3d8625288a0eb5cfd5b265
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-20 18:24:23 +0000
+
+    rework architecture
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
 
   Change: f091574918204c7d4cf79b85a764f2ee1f976909
   Author: Adam Stokes <adam.stokes@ubuntu.com>

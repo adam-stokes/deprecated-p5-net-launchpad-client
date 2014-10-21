@@ -13,12 +13,11 @@ package Net::Launchpad::Client;
 =cut
 
 use Moose;
-use Moose::Util qw(apply_all_roles);
 use Function::Parameters;
-use Mojo::JSON qw(decode_json);
 use Mojo::UserAgent;
+use Mojo::URL;
+use Mojo::JSON qw(decode_json);
 use Mojo::Parameters;
-use Module::Runtime qw(use_package_optimistically);
 use namespace::autoclean;
 
 =attr consumer_key
@@ -38,7 +37,6 @@ OAuth access_token_secret
 Staging or Production boolean
 
 =cut
-has cache               => (is => 'rw');
 has consumer_key        => (is => 'ro', isa => 'Str');
 has access_token        => (is => 'ro', isa => 'Str');
 has access_token_secret => (is => 'ro', isa => 'Str');
@@ -49,7 +47,7 @@ has 'ua' => (
     isa     => 'Mojo::UserAgent',
     default => method {
         my $ua = Mojo::UserAgent->new;
-        $ua->transactor->name("Net::Launchpad/0.99");
+        $ua->transactor->name("Net::Launchpad");
         return $ua;
     }
 );
@@ -89,6 +87,12 @@ method _build_auth_header {
         'oauth_nonce=' . $self->nonce);
 }
 
+method api_url {
+    return Mojo::URL->new('https://api.launchpad.net/1.0/')
+      unless $self->staging;
+    return Mojo::URL->new('https://api.staging.launchpad.net/1.0/');
+}
+
 method __path_cons($path) {
     if ($path =~ /^http.*api/) {
         return Mojo::URL->new($path);
@@ -96,16 +100,7 @@ method __path_cons($path) {
     return $self->api_url->path($path);
 }
 
-method get(Str $resource) {
-    my $uri = $self->__path_cons($resource);
-    my $tx =
-      $self->ua->get(
-        $uri->to_string => {'Authorization' => $self->authorization_header});
-    die $tx->res->body unless $tx->success;
-    return decode_json($tx->res->body);
-}
-
-method post(Str $resource, HashRef $params) {
+method post (Str $resource, HashRef $params) {
     my $params_hash = Mojo::Parameters->new($params);
     my $uri         = $self->__path_cons($resource);
     my $tx =
@@ -115,17 +110,13 @@ method post(Str $resource, HashRef $params) {
     die $tx->res->message unless $tx->success;
 }
 
-# PUBLIC
-
-=method api_url
-
-Launchpad API host
-
-=cut
-method api_url {
-    return Mojo::URL->new('https://api.launchpad.net/1.0/')
-      unless $self->staging;
-    return Mojo::URL->new('https://api.staging.launchpad.net/1.0/');
+method get (Str $resource) {
+    my $uri = $self->__path_cons($resource);
+    my $tx =
+      $self->ua->get(
+        $uri->to_string => {'Authorization' => $self->authorization_header});
+    die $tx->res->body unless $tx->success;
+    return decode_json($tx->res->body);
 }
 
 __PACKAGE__->meta->make_immutable;

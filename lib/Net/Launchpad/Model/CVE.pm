@@ -17,21 +17,13 @@ package Net::Launchpad::Model::CVE;
 
 =cut
 
-use Moose::Role;
+use Moose;
 use Function::Parameters;
-with 'Net::Launchpad::Model';
+use namespace::autoclean;
 
-method by_sequence($sequence) {
-    $self->cache($self->get(sprintf("%s/bugs/cve/%s", $self->api_url, $sequence)));
-    return $self->cache;
-}
+has params => (is => 'rw', isa => 'HashRef');
 
-method bugs {
-    my $bugs = $self->get($self->cache->{bugs_collection_link});
-    return $bugs->{entries};
-}
-
-
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__

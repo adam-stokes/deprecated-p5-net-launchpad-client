@@ -4,13 +4,15 @@ package Net::Launchpad::Model::Bug;
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
+    use Net::Launchpad::Model::Bug;
     my $c = Net::Launchpad::Client->new(
         consumer_key        => 'key',
         access_token        => '3243232',
         access_token_secret => '432432432'
     );
 
-    my $bug = $c->bug->by_id(3);
+    my $model = Net::Launchpad::Model::Bug->new(client => $c);
+    my $bug = $model->by_id(3)
 
     print "Title: ". $bug->{title};
     print "Desc:  ". $bug->{description};
@@ -18,48 +20,13 @@ package Net::Launchpad::Model::Bug;
 
 =cut
 
-use Moose::Role;
+use Moose;
+use namespace::autoclean;
 use Function::Parameters;
-with 'Net::Launchpad::Model';
 
-method by_id ($id) {
-    $self->cache(
-        $self->get(sprintf("%s/bugs/%s", $self->api_url, $id)));
-    return $self->cache;
-}
+has params => (is => 'rw', isa => 'HashRef');
 
-method tasks {
-    my $tasks = $self->get($self->cache->{bug_tasks_collection_link});
-    return $tasks->{entries};
-}
-
-method watches {
-    my $watches = $self->get($self->cache->bug_watches_collection_link);
-    return $watches->entries;
-}
-
-method attachments {
-    my $attachments = $self->get($self->cache->attachments_collection_link);
-    return $attachments->entries;
-}
-
-method activity {
-    my $activity = $self->get($self->cache->activity_collection_link);
-    return $activity->entries;
-}
-
-method duplicate_of {
-    return $self->get($self->cache->duplicate_of_link);
-}
-
-method messages {
-    return $self->get($self->cache->messages_collection_link);
-}
-
-method owner {
-    return $self->get($self->cache->owner_link);
-}
-
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__

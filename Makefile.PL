@@ -20,10 +20,12 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Net::Launchpad::Client",
   "PREREQ_PM" => {
+    "Data::Dumper::Concise" => 0,
     "Function::Parameters" => 0,
     "Module::Runtime" => 0,
     "Mojo::JSON" => 0,
     "Mojo::Parameters" => 0,
+    "Mojo::URL" => 0,
     "Mojo::UserAgent" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
@@ -31,8 +33,6 @@ my %WriteMakefileArgs = (
     "namespace::autoclean" => 0
   },
   "TEST_REQUIRES" => {
-    "Class::Load" => 0,
-    "Data::Dumper::Concise" => 0,
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
     "FindBin" => 0,
@@ -58,7 +58,6 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Class::Load" => 0,
   "Data::Dumper::Concise" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
@@ -69,6 +68,7 @@ my %FallbackPrereqs = (
   "Module::Runtime" => 0,
   "Mojo::JSON" => 0,
   "Mojo::Parameters" => 0,
+  "Mojo::URL" => 0,
   "Mojo::UserAgent" => 0,
   "Mojolicious" => 0,
   "Moose" => 0,

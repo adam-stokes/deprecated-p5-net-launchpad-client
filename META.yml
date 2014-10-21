@@ -3,8 +3,6 @@ abstract: 'Launchpad.net Client'
 author:
   - 'Adam Stokes <adamjs@cpan.org>'
 build_requires:
-  Class::Load: '0'
-  Data::Dumper::Concise: '0'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   FindBin: '0'
@@ -32,10 +30,12 @@ meta-spec:
   version: '1.4'
 name: Net-Launchpad-Client
 requires:
+  Data::Dumper::Concise: '0'
   Function::Parameters: '0'
   Module::Runtime: '0'
   Mojo::JSON: '0'
   Mojo::Parameters: '0'
+  Mojo::URL: '0'
   Mojo::UserAgent: '0'
   Moose: '0'
   Moose::Role: '0'
