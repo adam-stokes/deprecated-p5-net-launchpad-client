@@ -1,6 +1,6 @@
-package Net::Launchpad::Role::Project;
+package Net::Launchpad::Role::Archive;
 
-# ABSTRACT: Project roles
+# ABSTRACT: Archive roles
 
 use Moose::Role;
 use Function::Parameters;

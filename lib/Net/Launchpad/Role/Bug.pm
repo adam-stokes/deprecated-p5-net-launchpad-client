@@ -5,38 +5,66 @@ package Net::Launchpad::Role::Bug;
 use Moose::Role;
 use Function::Parameters;
 
-has lpc => (is => 'rw', isa => 'Net::Launchpad::Client');
+with 'Net::Launchpad::Role::Common';
+
+=method tasks
+
+Returns a list of entries in the tasks object.
+
+=cut
 
 method tasks {
-    my $tasks = $self->lpc->get($self->params->{bug_tasks_collection_link});
-    return $tasks->{entries};
+    return $self->collection('bug_tasks');
 }
+
+=method watches
+
+Returns bug watch collection
+
+=cut
 
 method watches {
-    my $watches = $self->lpc->get($self->params->{bug_watches_collection_link});
-    return $watches->{entries};
+    return $self->collection('bug_watches');
 }
+
+=method attachments
+
+Returns list of bug attachments
+
+=cut
 
 method attachments {
-    my $attachments = $self->lpc->get($self->params->{attachments_collection_link});
-    return $attachments->{entries};
+    return $self->collection('attachments');
 }
+
+=method activity
+
+Returns a bug activity collection
+
+=cut
 
 method activity {
-    my $activity = $self->lpc->get($self->params->{activity_collection_link});
-    return $activity->{entries};
+    return $self->collection('activity');
 }
+
+=method duplicate_of
+
+Returns a bug resource that the specific bug is a duplicate of
+
+=cut
 
 method duplicate_of {
-    return $self->lpc->get($self->params->{duplicate_of_link});
+    return $self->resource('duplicate_of');
 }
+
+=method messages
+
+Returns bug messages associated with Bug.
+
+=cut
 
 method messages {
-    return $self->lpc->get($self->params->{messages_collection_link});
-}
-
-method owner {
-    return $self->lpc->get($self->params->{owner_link});
+    return $self->collection('messages');
 }
 
 1;

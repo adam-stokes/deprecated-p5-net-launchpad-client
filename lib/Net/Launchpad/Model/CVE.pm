@@ -10,7 +10,7 @@ package Net::Launchpad::Model::CVE;
         access_token_secret => '432432432'
     );
 
-    my $cve = $c->by_sequence('XXXX-XXXX');
+    my $cve = $c->cve('XXXX-XXXX');
 
     print "Title: ". $cve->{title};
     print "Desc:  ". $cve->{description};
@@ -18,10 +18,8 @@ package Net::Launchpad::Model::CVE;
 =cut
 
 use Moose;
-use Function::Parameters;
 use namespace::autoclean;
-
-has params => (is => 'rw', isa => 'HashRef');
+extends 'Net::Launchpad::Model::Base';
 
 __PACKAGE__->meta->make_immutable;
 1;

@@ -1,6 +1,6 @@
-package Net::Launchpad::Role::Project;
+package Net::Launchpad::Role::Country;
 
-# ABSTRACT: Project roles
+# ABSTRACT: Country roles
 
 use Moose::Role;
 use Function::Parameters;

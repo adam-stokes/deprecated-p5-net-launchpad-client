@@ -1,6 +1,6 @@
-package Net::Launchpad::Role::Project;
+package Net::Launchpad::Role::Builder;
 
-# ABSTRACT: Project roles
+# ABSTRACT: Builder roles
 
 use Moose::Role;
 use Function::Parameters;

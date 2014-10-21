@@ -115,8 +115,12 @@ method get (Str $resource) {
     my $tx =
       $self->ua->get(
         $uri->to_string => {'Authorization' => $self->authorization_header});
-    die $tx->res->body unless $tx->success;
-    return decode_json($tx->res->body);
+    if ($tx->success) {
+      return decode_json($tx->res->body);
+    } else {
+      my $err = $tx->error;
+      die "$err->{code} response: $err->{message}" if $err->{code};
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

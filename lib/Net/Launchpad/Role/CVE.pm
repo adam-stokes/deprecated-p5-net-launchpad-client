@@ -5,9 +5,6 @@ package Net::Launchpad::Role::CVE;
 use Moose::Role;
 use Function::Parameters;
 
-method bugs {
-    my $bugs = $self->get($self->params->{bugs_collection_link});
-    return $bugs->{entries};
-}
+with 'Net::Launchpad::Role::Common';
 
 1;

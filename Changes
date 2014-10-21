@@ -2,9 +2,25 @@
 Changes from 2013-10-21 00:00:00 +0000 to present.
 ==================================================
 
------------------------------------------
-version 1.04 at 2014-10-21 04:45:36 +0000
------------------------------------------
+--------------------------------------------
+version 1.1.0_1 at 2014-10-21 18:48:00 +0000
+--------------------------------------------
+
+  Change: d1afb488c6a4555e40bb4fc5e9fcd3dc70a13055
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-21 14:47:34 +0000
+
+    More model definitations and search implementations
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: 6fdd34e7f75ae4b1fc44f1418299bf6b87030f85
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-21 00:46:29 +0000
+
+    nfc
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
 
   Change: 14c3681a75c563652b3d8625288a0eb5cfd5b265
   Author: Adam Stokes <adam.stokes@ubuntu.com>
