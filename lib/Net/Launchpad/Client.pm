@@ -1,6 +1,18 @@
 package Net::Launchpad::Client;
 # ABSTRACT: Launchpad.net Client
 
+# TODO:
+# <wgrant> stokachu: A GET to the API root with an Accept header of
+# "application/vd.sun.wadl+xml". This is documented on
+# https://help.launchpad.net/API/Hacking, fwiw.
+# <wgrant> Also, a GET to the application root itself will give you the root collects as JSON.
+# <wgrant> eg. https://api.launchpad.net/1.0//?ws.accept=application/json
+# <wgrant> (ws.accept overrides the Accepts header, for easy poking in a browser)
+# <wgrant> The HTML docs are generated from the machine-readable
+# WADL. You don't need to parse the WADL unless you want something
+# like launchpadlib, where objects know about their methods, and check
+# arguments automatically, etc.
+
 =head1 SYNOPSIS
 
     use Net::Launchpad::Client;
@@ -54,7 +66,7 @@ has 'ua' => (
 
 has 'nonce' => (
     is      => 'ro',
-    isa     => 'Str',
+v    isa     => 'Str',
     default => method {
         my @a = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
         my $nonce = '';
