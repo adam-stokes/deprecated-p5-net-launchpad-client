@@ -29,12 +29,8 @@ my $model = Net::Launchpad::Model->new(lpc => $lp);
 my $country = $model->country('US');
 ok($country->result->{title} eq 'United States of America', "Found the US country");
 
-# TODO: check if these api methods are truly exposed.
-# https://api.launchpad.net/1.0.html#countries
-#
-# use_ok('Net::Launchpad::Query');
-# my $query           = Net::Launchpad::Query->new(lpc => $lp);
-# my $country_by_code = $query->countries->get_by_code('US');
-# print Dumper($country_by_code);
-
+use_ok('Net::Launchpad::Query');
+my $query           = Net::Launchpad::Query->new(lpc => $lp);
+my $country_by_code = $query->countries->get_by_code('US');
+ok($country_by_code->result->{name} eq 'United States');
 done_testing;

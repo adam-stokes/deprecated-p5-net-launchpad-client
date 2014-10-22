@@ -8,7 +8,7 @@ use namespace::autoclean;
 
 extends 'Net::Launchpad::Model::Base';
 
-has '+ns' => (is => 'ro', default => 'countries');
+has '+ns' => (is => 'ro', default => '+countries');
 
 __PACKAGE__->meta->make_immutable;
 
