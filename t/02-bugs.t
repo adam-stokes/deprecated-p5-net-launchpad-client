@@ -19,9 +19,11 @@ diag("testing bugs api");
 use_ok('Net::Launchpad::Client');
 
 
-my $lp = Net::Launchpad::Client->new(consumer_key => $ENV{LP_CONSUMER_KEY},
-                                    access_token => $ENV{LP_ACCESS_TOKEN},
-                                    access_token_secret => $ENV{LP_ACCESS_TOKEN_SECRET});
+my $lp = Net::Launchpad::Client->new(
+    consumer_key        => $ENV{LP_CONSUMER_KEY},
+    access_token        => $ENV{LP_ACCESS_TOKEN},
+    access_token_secret => $ENV{LP_ACCESS_TOKEN_SECRET}
+);
 
 use_ok('Net::Launchpad::Model');
 my $model = Net::Launchpad::Model->new(lpc => $lp);
