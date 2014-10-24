@@ -1,10 +1,24 @@
 ==================================================
-Changes from 2013-10-22 00:00:00 +0000 to present.
+Changes from 2013-10-24 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 1.2.1 at 2014-10-22 04:08:45 +0000
+version 2.000 at 2014-10-24 05:15:29 +0000
 ------------------------------------------
+
+  Change: 511bec78ddfae85b11a0dc9d3287f5fe2f28dd6e
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-22 00:17:23 +0000
+
+    add todo
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
+
+  Change: bd5cb99b713f73f5f7ff8db6ab9787d172e2904e
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-22 00:09:28 +0000
+
+    v1.2.1 
 
   Change: 4e79807888e911e6d30f01e26f4054fa21cfd8e1
   Author: Adam Stokes <adam.stokes@ubuntu.com>

@@ -44,5 +44,5 @@ requires:
 resources:
   homepage: https://github.com/battlemidget/Net-Launchpad-Client
   repository: https://github.com/battlemidget/Net-Launchpad-Client.git
-version: 1.2.1
+version: '2.000'
 x_authority: cpan:ADAMJS

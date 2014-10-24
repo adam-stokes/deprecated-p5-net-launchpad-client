@@ -66,7 +66,7 @@ has 'ua' => (
 
 has 'nonce' => (
     is      => 'ro',
-v    isa     => 'Str',
+    isa     => 'Str',
     default => method {
         my @a = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
         my $nonce = '';
