@@ -3,8 +3,16 @@ Changes from 2013-10-24 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 2.000 at 2014-10-24 05:15:29 +0000
+version 2.000 at 2014-10-24 05:15:52 +0000
 ------------------------------------------
+
+  Change: 076014f283f09ca83affd598dc21c0055dbfcc49
+  Author: Adam Stokes <adam.stokes@ubuntu.com>
+  Date : 2014-10-24 01:15:36 +0000
+
+    fix syntax error, API stabilized
+
+    Signed-off-by: Adam Stokes <adam.stokes@ubuntu.com> 
 
   Change: 511bec78ddfae85b11a0dc9d3287f5fe2f28dd6e
   Author: Adam Stokes <adam.stokes@ubuntu.com>
